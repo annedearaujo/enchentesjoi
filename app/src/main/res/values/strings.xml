@@ -1,0 +1,11 @@
+<resources>
+
+    <string name="app_name">Aplicativo de Alerta de Enchente</string>
+    <string name="report_flood">Informe Enchente</string>
+    <string name="location">Localização</string>
+    <string name="severity">Gravidade</string>
+    <string name="description">Descrição</string>
+    <string name="photos">Fotos</string>
+    <string name="action_settings">Settings</string>
+
+</resources>
