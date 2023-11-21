@@ -1,9 +1,12 @@
 package com.example.appalertaenchentes
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.appalertaenchentes.databinding.ActivityMainBinding
-import android.content.Intent
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -15,7 +18,13 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.reportFloodButton.setOnClickListener {
-            startActivity(Intent(this, ReportFloodActivity::class.java))
+            try {
+                startActivity(Intent(this, ReportFloodActivity::class.java))
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Log.e("MainActivity", "Erro ao iniciar a ReportFloodActivity: ${e.message}")
+                Toast.makeText(this, "Erro ao iniciar a atividade", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 }

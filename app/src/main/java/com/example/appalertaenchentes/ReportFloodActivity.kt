@@ -1,15 +1,31 @@
 package com.example.appalertaenchentes
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.provider.MediaStore
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.appalertaenchentes.database.DatabaseHelper
 import com.example.appalertaenchentes.databinding.ActivityReportFloodBinding
+
 
 class ReportFloodActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityReportFloodBinding
     private lateinit var databaseHelper: DatabaseHelper
+    private val pickImageRequest = 1
+
+    private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            // Obtenha a URI da imagem selecionada
+            val imageUri = result.data?.data
+
+            // Configure a imagem no ImageView
+            binding.photosImageView.setImageURI(imageUri)
+        }
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +36,24 @@ class ReportFloodActivity : AppCompatActivity() {
 
         binding.reportFloodButton.setOnClickListener {
             reportFlood()
+        }
+
+        binding.selectImageButton.setOnClickListener {
+            // Adicione um Intent para abrir a galeria
+            val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            getContent.launch(intent)
+        }
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == pickImageRequest && resultCode == Activity.RESULT_OK) {
+            // Obtenha a URI da imagem selecionada
+            val imageUri = data?.data
+
+            // Configure a imagem no ImageView
+            binding.photosImageView.setImageURI(imageUri)
         }
     }
 
