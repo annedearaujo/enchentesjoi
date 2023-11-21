@@ -10,13 +10,14 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.appalertaenchentes.database.DatabaseHelper
 import com.example.appalertaenchentes.databinding.ActivityReportFloodBinding
 
-
 class ReportFloodActivity : AppCompatActivity() {
 
+    // Declaração de variáveis
     private lateinit var binding: ActivityReportFloodBinding
     private lateinit var databaseHelper: DatabaseHelper
     private val pickImageRequest = 1
 
+    // Inicialização do contrato para obter conteúdo da atividade
     private val getContent = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {
             // Obtenha a URI da imagem selecionada
@@ -27,13 +28,16 @@ class ReportFloodActivity : AppCompatActivity() {
         }
     }
 
+    // Método chamado quando a atividade é criada
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityReportFloodBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        // Inicialização do banco de dados
         databaseHelper = DatabaseHelper(this)
 
+        // Configuração de listeners para botões
         binding.reportFloodButton.setOnClickListener {
             reportFlood()
         }
@@ -45,6 +49,7 @@ class ReportFloodActivity : AppCompatActivity() {
         }
     }
 
+    // Método chamado quando o resultado de uma atividade é recebido
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -57,7 +62,9 @@ class ReportFloodActivity : AppCompatActivity() {
         }
     }
 
+    // Método para relatar enchente
     private fun reportFlood() {
+        // Obtenção de dados do formulário
         val location = binding.locationEditText.text.toString()
         val severity = binding.severitySpinner.selectedItem.toString()
         val description = binding.descriptionEditText.text.toString()
@@ -66,7 +73,9 @@ class ReportFloodActivity : AppCompatActivity() {
         // Antes de validar os dados, limpe a mensagem de erro
         binding.severityInputLayout.error = null
 
+        // Validação dos campos obrigatórios
         if (location.isEmpty()) {
+            // Exibir mensagem de erro e definir erro no EditText
             Toast.makeText(this, "O campo localização é obrigatório.", Toast.LENGTH_SHORT).show()
             binding.locationEditText.error = "O campo localização é obrigatório."
             return
@@ -78,7 +87,7 @@ class ReportFloodActivity : AppCompatActivity() {
             return
         }
 
-        // Fornecer feedback
+        // Fornecer feedback ao usuário
         binding.reportFloodButton.text = "Relatório enviado"
         binding.reportFloodButton.isEnabled = false
     }
