@@ -1,11 +1,52 @@
 <resources>
 
-    <string name="app_name">Aplicativo de Alerta de Enchente</string>
+    <!-- App Name -->
+    <string name="app_name">Alerta de Enchente</string>
+
+    <!-- Buttons and Labels -->
     <string name="report_flood">Informe Enchente</string>
-    <string name="location">Localização</string>
+    <string name="location">Localidade</string>
     <string name="severity">Gravidade</string>
     <string name="description">Descrição</string>
     <string name="photos">Fotos</string>
-    <string name="action_settings">Settings</string>
+    <string name="select_image">Selecionar imagem</string>
+    <string name="send_report">Enviar alerta</string>
+    <string name="action_settings">Configurações</string>
 
+    <!-- Severity Levels -->
+    <string name="gravity_low">Baixa</string>
+    <string name="gravity_medium">Média</string>
+    <string name="gravity_high">Alta</string>
+
+    <!-- Severity Options Array -->
+    <string-array name="gravity_options">
+        <item>Selecione uma gravidade</item>
+        <item>@string/gravity_low</item>
+        <item>@string/gravity_medium</item>
+        <item>@string/gravity_high</item>
+    </string-array>
+
+    <!-- Hints and Descriptions -->
+    <string name="location_hint">Digite o bairro...</string>
+    <string name="location_description">Campo de texto com sugestões para inserir o bairro da enchente</string>
+
+    <string name="severity_hint">Selecione a gravidade...</string>
+    <string name="severity_description">Menu suspenso para escolher a gravidade da enchente</string>
+
+    <string name="description_hint">Descreva a enchente...</string>
+    <string name="description_description">Campo de texto para inserir uma descrição detalhada da enchente</string>
+
+    <!-- Image Button and Description -->
+    <string name="select_image_button_description">Toque para selecionar uma imagem relacionada à enchente</string>
+
+    <!-- Image Description -->
+    <string name="photos_image_description">Imagem relacionada à enchente</string>
+
+    <!-- Report Flood Button Description -->
+    <string name="report_flood_button_description">Toque para enviar o relatório da enchente</string>
+
+    <string name="menu_home_label">Início</string>
+    <string name="menu_report_label">Reportar</string>
+
+    <string name="back_button_description">Toque para voltar à pagina anterior (início)</string>
 </resources>
