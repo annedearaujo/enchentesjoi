@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1058540305028",
+    "project_id": "reportflood-aa1a3",
+    "storage_bucket": "reportflood-aa1a3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1058540305028:android:ca970e41c719f8598ea0d1",
+        "android_client_info": {
+          "package_name": "com.example.appalertaenchentes"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC64zrer9MiCBYsm2fffaiYsDQh7LJNFP8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
