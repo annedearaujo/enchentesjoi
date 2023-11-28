@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="Theme.ReportFlood" parent="Base.Theme.ReportFlood" />
+    <style name="Theme.ReportFlood" parent="Base.Theme.ReportFlood" ></style>
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light">
         <!-- Personalizações específicas para os menus de sobreposição -->

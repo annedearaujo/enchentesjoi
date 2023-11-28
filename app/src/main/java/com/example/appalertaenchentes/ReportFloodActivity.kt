@@ -16,8 +16,9 @@ import com.example.appalertaenchentes.databinding.ActivityReportFloodBinding
 class ReportFloodActivity : AppCompatActivity() {
 
     // Declaração de variáveis
-    private lateinit var binding: ActivityReportFloodBinding
-    private lateinit var databaseHelper: DatabaseHelper
+    // binding público para efetuar testes
+    lateinit var binding: ActivityReportFloodBinding
+    internal lateinit var databaseHelper: DatabaseHelper
 
     // Declaração de gravityOptions como uma propriedade da classe
     private val gravityOptions: Array<String> by lazy {
@@ -37,7 +38,7 @@ class ReportFloodActivity : AppCompatActivity() {
             } else {
                 // Tratar o caso em que o usuário pressionou "Cancelar" na galeria
                 Toast.makeText(this, "Nenhuma imagem selecionada", Toast.LENGTH_SHORT).show()
-                Log.d("ReportFloodActivity", "Seleção de imagem cancelada")
+                Log.d("ReportFloodActivity", "[LOG] Seleção de imagem cancelada")
             }
         }
     }
@@ -92,7 +93,7 @@ class ReportFloodActivity : AppCompatActivity() {
     // Método chamado quando a atividade é criada
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.d("ReportFloodActivity", "onCreate ReportFloodActivity")
+        Log.d("ReportFloodActivity", "[LOG] onCreate ReportFloodActivity")
 
         // Configurar visualizações e ouvintes ao criar a atividade.
         setupViews()
@@ -105,7 +106,7 @@ class ReportFloodActivity : AppCompatActivity() {
 
         // Configuração do botão de voltar
         binding.backButton.setOnClickListener {
-            Log.d("ReportFloodActivity", "Botão de voltar pressionado")
+            Log.d("ReportFloodActivity", "[LOG] Botão de voltar pressionado")
 
             // Encerrar a ReportFloodActivity
             finish()
@@ -123,7 +124,7 @@ class ReportFloodActivity : AppCompatActivity() {
         binding.severitySpinner.setSelection(0)  // 0 representa a primeira posição no array, que é "Selecione uma gravidade"
 
         // Verificar se a inicialização do Spinner está ocorrendo conforme o esperado e se as opções de gravidade são carregadas corretamente.
-        Log.d("ReportFloodActivity", "Opções de gravidade: ${gravityOptions.joinToString(", ")}")
+        Log.d("ReportFloodActivity", "[LOG] Opções de gravidade: '${gravityOptions.joinToString(", ")}'")
 
         // Configuração do AutoCompleteTextView
         val locationAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, locationOptions)
@@ -137,14 +138,14 @@ class ReportFloodActivity : AppCompatActivity() {
         }
 
         binding.selectImageButton.setOnClickListener {
-            Log.d("ReportFloodActivity", "Botão de seleção de imagem pressionado")
+            Log.d("ReportFloodActivity", "[LOG] Botão de seleção de imagem pressionado")
             // Intent para abrir a galeria
             val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
             getContent.launch(intent)
         }
     }
 
-    private fun getFormData(): Triple<String, String, String> {
+    internal fun getFormData(): Triple<String, String, String> {
         // Obtém os dados do formulário (localização, gravidade e descrição).
         val location = binding.locationAutoComplete.text.toString()
         val severity = binding.severitySpinner.selectedItem.toString()
@@ -152,20 +153,20 @@ class ReportFloodActivity : AppCompatActivity() {
         return Triple(location, severity, description)
     }
 
-    private fun reportFlood() {
+    internal fun reportFlood() {
         val (location, severity, description) = getFormData()
 
         // Antes de validar os dados, limpe a mensagem de erro
         binding.severityInputLayout.error = null
 
         // Dados antes da validação
-        Log.d("ReportFloodActivity", "Localidade antes da validação: $location")
-        Log.d("ReportFloodActivity", "Gravidade antes da validação: $severity")
-        Log.d("ReportFloodActivity", "Descrição antes da validação: $description")
+        Log.d("ReportFloodActivity", "[LOG] Localidade antes da validação: $location")
+        Log.d("ReportFloodActivity", "[LOG] Gravidade antes da validação: $severity")
+        Log.d("ReportFloodActivity", "[LOG] Descrição antes da validação: $description")
 
         // Validação dos campos obrigatórios antes de prosseguir com o relatório de enchente.
         if (location.isEmpty()) {
-            Log.d("ReportFloodActivity", "Localidade não informada")
+            Log.d("ReportFloodActivity", "[LOG] Localidade não informada")
             // Exibir mensagem de erro e definir erro no EditText
             Toast.makeText(this, "O campo localidade é obrigatório.", Toast.LENGTH_SHORT).show()
             binding.locationAutoComplete.error = "Informe uma localidade."
@@ -173,7 +174,7 @@ class ReportFloodActivity : AppCompatActivity() {
         }
 
         if (severity == "Selecione uma gravidade") {
-            Log.d("ReportFloodActivity", "Gravidade não selecionada")
+            Log.d("ReportFloodActivity", "[LOG] Gravidade não selecionada")
             // Mensagem de erro para o severityInputLayout
             Toast.makeText(this, "O campo gravidade é obrigatório.", Toast.LENGTH_SHORT).show()
             binding.severityInputLayout.error = "Selecione uma gravidade."
@@ -181,19 +182,19 @@ class ReportFloodActivity : AppCompatActivity() {
         }
 
         // Dados após inserção do usuário
-        Log.d("ReportFloodActivity", "Localidade: $location, Gravidade: $severity, Descrição: $description")
+        Log.d("ReportFloodActivity", "[LOG] Localidade: $location, Gravidade: $severity, Descrição: $description")
 
         // Fornecer feedback ao usuário
         showToast("Relatório enviado com sucesso!")
         // Verificar se o feedback ao usuário está sendo exibido e se o botão está sendo desabilitado corretamente.
-        Log.d("ReportFloodActivity", "Relatório enviado com sucesso!")
+        Log.d("ReportFloodActivity", "[LOG] Relatório enviado com sucesso!")
 
         // Desabilitar o botão após enviar o relatório
         binding.reportFloodButton.text = "Relatório enviado"
         binding.reportFloodButton.isEnabled = false
     }
 
-    private fun showToast(message: String) {
+    internal fun showToast(message: String) {
         // Método para exibir Toast
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }

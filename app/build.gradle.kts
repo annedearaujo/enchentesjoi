@@ -1,8 +1,7 @@
 plugins {
-    id("com.android.application")
-    id("org.jetbrains.kotlin.android")
+    id("com.android.application") version "8.1.4"
+    id("org.jetbrains.kotlin.android") version "1.9.0"
     id("com.google.gms.google-services")
-    id("com.google.firebase.crashlytics")
 }
 
 android {
@@ -29,12 +28,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 
     buildFeatures {
@@ -51,15 +50,27 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.5")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.5")
 
-    // Google Play Services & Firebase
+    // Google Play Services
     implementation("com.google.android.gms:play-services-maps:18.2.0")
-    implementation("com.google.firebase:firebase-crashlytics:18.6.0")
-    implementation("com.google.firebase:firebase-analytics:21.5.0")
+    implementation("androidx.test.ext:junit-ktx:1.1.5")
 
     // Testes
     testImplementation("junit:junit:4.13.2")
+    testImplementation("org.mockito:mockito-core:5.7.0")
+    testImplementation("com.nhaarman.mockitokotlin2:mockito-kotlin:2.2.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.1")
+    testImplementation("org.assertj:assertj-core:3.24.2")
+    testImplementation ("org.robolectric:robolectric:4.11.1")
+    testImplementation("androidx.test:runner:1.5.2")
+    testImplementation ("io.mockk:mockk:1.13.8")
+
+    // Testes instrumentados
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    androidTestImplementation("androidx.test.espresso:espresso-intents:3.5.1")
+    androidTestImplementation ("androidx.test:core:1.5.0")
+    androidTestImplementation ("io.mockk:mockk-android:1.13.8")
 
     // Room & Lifecycle
     annotationProcessor("androidx.room:room-compiler:2.6.0")
@@ -70,4 +81,5 @@ dependencies {
     implementation("com.google.android.gms:play-services-location:21.0.1")
     implementation("androidx.activity:activity-ktx:1.8.1")
     implementation("androidx.fragment:fragment-ktx:1.6.2")
+    implementation("com.deque.android:axe-android:0.2.0")
 }

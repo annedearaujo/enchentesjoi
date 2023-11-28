@@ -105,7 +105,8 @@
         android:contentDescription="@string/description_description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/descriptionLabel" />
+        app:layout_constraintTop_toBottomOf="@id/descriptionLabel"
+        android:autofillHints="description" />
 
     <!-- Image -->
     <Button

@@ -52,4 +52,7 @@
     <!-- Back Button Description -->
     <string name="back_button_description">Toque para voltar à página anterior (início)</string>
 
+    <string name="generic_error">Ocorreu um erro. Por favor, tente novamente.</string>
+    <string name="activity_not_found_error">Atividade não encontrada. Por favor, tente novamente.</string>
+
 </resources>
