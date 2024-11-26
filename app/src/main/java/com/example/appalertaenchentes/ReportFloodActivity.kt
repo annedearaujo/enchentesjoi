@@ -10,15 +10,24 @@ import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
-import com.example.appalertaenchentes.database.DatabaseHelper
+import androidx.lifecycle.lifecycleScope
+import com.example.appalertaenchentes.database.AppDatabase
+import com.example.appalertaenchentes.database.FloodReport
 import com.example.appalertaenchentes.databinding.ActivityReportFloodBinding
+import com.example.appalertaenchentes.utils.LocationUtils
+import kotlinx.coroutines.launch
+
 
 class ReportFloodActivity : AppCompatActivity() {
 
     // Declaração de variáveis
     // binding público para efetuar testes
     lateinit var binding: ActivityReportFloodBinding
-    internal lateinit var databaseHelper: DatabaseHelper
+
+    // DAO para interagir com o banco de dados
+    private val floodReportDao by lazy {
+        AppDatabase.getDatabase(this).floodReportDao()
+    }
 
     // Declaração de gravityOptions como uma propriedade da classe
     private val gravityOptions: Array<String> by lazy {
@@ -43,53 +52,6 @@ class ReportFloodActivity : AppCompatActivity() {
         }
     }
 
-    // Lista de opções de localização disponíveis para o AutoCompleteTextView.
-    private val locationOptions = arrayOf(
-        "Adhemar Garcia",
-        "America",
-        "Anita Garibaldi",
-        "Atiradores",
-        "Aventureiro",
-        "Boa Vista",
-        "Boehmerwald",
-        "Bom Retiro",
-        "Bucarein",
-        "Centro",
-        "Comasa",
-        "Costa e Silva",
-        "Espinheiros",
-        "Fatima",
-        "Floresta",
-        "Glória",
-        "Guanabara",
-        "Iririú",
-        "Itaum",
-        "Itinga",
-        "Parque Guarani",
-        "Jardim Iririú",
-        "Jardim Paraíso",
-        "Jardim Sophia",
-        "Jarivatuba",
-        "Jativoca",
-        "João Costa",
-        "Morro do Meio",
-        "Nova Brasília",
-        "Paranaguamirim",
-        "Petrópolis",
-        "Bom Retiro",
-        "Pirabeiraba",
-        "Profipo",
-        "Saguaçu",
-        "Santa Catarina",
-        "Santo Antônio",
-        "São Marcos",
-        "Ulysses Guimarães",
-        "Vila Cubatão",
-        "Vila Nova",
-        "Zona Industrial Norte",
-        "Zona Industrial Tupy"
-    )
-
     // Método chamado quando a atividade é criada
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -112,9 +74,6 @@ class ReportFloodActivity : AppCompatActivity() {
             finish()
         }
 
-        // Inicialização do banco de dados
-        databaseHelper = DatabaseHelper(this)
-
         // Configuração das opções do Spinner
         val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, gravityOptions)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
@@ -126,8 +85,8 @@ class ReportFloodActivity : AppCompatActivity() {
         // Verificar se a inicialização do Spinner está ocorrendo conforme o esperado e se as opções de gravidade são carregadas corretamente.
         Log.d("ReportFloodActivity", "[LOG] Opções de gravidade: '${gravityOptions.joinToString(", ")}'")
 
-        // Configuração do AutoCompleteTextView
-        val locationAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, locationOptions)
+        // Configuração do AutoCompleteTextView com opções de localização do locationutils
+        val locationAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, LocationUtils.locationOptions)
         binding.locationAutoComplete.setAdapter(locationAdapter)
     }
 
@@ -179,6 +138,24 @@ class ReportFloodActivity : AppCompatActivity() {
             Toast.makeText(this, "O campo gravidade é obrigatório.", Toast.LENGTH_SHORT).show()
             binding.severityInputLayout.error = "Selecione uma gravidade."
             return
+        }
+
+        // Criação de uma nova instância de FloodReport
+        val floodReport = FloodReport(
+            bairro = location,
+            gravidade = severity,
+            descricao = description,
+            data = System.currentTimeMillis()
+        )
+
+        // Inserção no banco de dados usando coroutine
+        lifecycleScope.launch {
+            floodReportDao.insert(floodReport)
+            runOnUiThread {
+                Toast.makeText(this@ReportFloodActivity, "Relatório salvo com sucesso!", Toast.LENGTH_SHORT).show()
+                binding.reportFloodButton.text = "Relatório enviado"
+                binding.reportFloodButton.isEnabled = false
+            }
         }
 
         // Dados após inserção do usuário

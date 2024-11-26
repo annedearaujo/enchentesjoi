@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <color name="textColor">#000000</color>
-    <color name="backgroundColor">#FFFFFF</color>
-    <color name="colorPrimary">#D81B1B</color>
-    <color name="colorPrimaryDark">#880808</color>
-    <color name="colorAccent">#008577</color>
-    <color name="overlayBackgroundColor">#000000</color>
+    <color name="textColor">#1A1A1A</color>
+    <color name="backgroundColor">#F1F7FB</color>
+    <color name="colorPrimary">#0077B6</color>
+    <color name="colorPrimaryDark">#005F88</color>
+    <color name="colorAccent">#48CAE4</color>
+    <color name="overlayBackgroundColor">#330077B6</color>
     <color name="overlayTextColor">#FFFFFF</color>
 
 </resources>

@@ -23,7 +23,7 @@ class ReportFloodActivityTest {
     fun setUp() {
         // Inicializa a instância da classe a ser testada e configura o mock do DatabaseHelper
         reportFloodActivity = ReportFloodActivity()
-        reportFloodActivity.databaseHelper = mockDatabaseHelper
+       // reportFloodActivity.databaseHelper = mockDatabaseHelper
     }
 
     @Test

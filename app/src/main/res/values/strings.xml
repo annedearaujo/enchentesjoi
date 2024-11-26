@@ -1,16 +1,16 @@
 <resources>
 
     <!-- App Name -->
-    <string name="app_name">Alerta de Enchente</string>
+    <string name="app_name">Enchentes Joinville</string>
 
     <!-- Buttons and Labels -->
-    <string name="report_flood">Informe Enchente</string>
+    <string name="report_flood">Relatar nova enchente</string>
     <string name="location">Localidade</string>
     <string name="severity">Gravidade</string>
     <string name="description">Descrição</string>
     <string name="photos">Fotos</string>
-    <string name="select_image">Selecionar imagem</string>
-    <string name="send_report">Enviar alerta</string>
+    <string name="select_image">Adicionar uma imagem</string>
+    <string name="send_report">Enviar relato</string>
     <string name="action_settings">Configurações</string>
 
     <!-- Severity Levels -->
@@ -47,7 +47,7 @@
 
     <!-- Menu Labels -->
     <string name="menu_home_label">Início</string>
-    <string name="menu_report_label">Reportar</string>
+    <string name="menu_report_label">Novo relato</string>
 
     <!-- Back Button Description -->
     <string name="back_button_description">Toque para voltar à página anterior (início)</string>

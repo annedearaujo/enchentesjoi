@@ -11,6 +11,7 @@ import com.example.appalertaenchentes.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
+
     // Declaração de variáveis
     // binding público para efetuar testes
     lateinit var binding: ActivityMainBinding
@@ -62,6 +63,19 @@ class MainActivity : AppCompatActivity() {
                 Log.d("MainActivity", "[LOG] Clicado no botão de Informe")
                 // Iniciar a atividade ReportFloodActivity
                 startActivity(reportFloodIntent)
+            } catch (e: ActivityNotFoundException) {
+                handleActivityNotFoundException(e)
+            } catch (e: Exception) {
+                handleException(e)
+            }
+        }
+        // Configuração do listener para o botão de configurar alertas
+        binding.btnConfigurarAlertas.setOnClickListener {
+            try {
+                Log.d("MainActivity", "[LOG] Clicado no botão de Configurar Alertas")
+                // Intent para a tela de configuração de alertas
+                val intent = Intent(this, ConfiguracaoAlertasActivity::class.java)
+                startActivity(intent)
             } catch (e: ActivityNotFoundException) {
                 handleActivityNotFoundException(e)
             } catch (e: Exception) {
