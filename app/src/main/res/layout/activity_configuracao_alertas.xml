@@ -28,6 +28,14 @@
         android:textSize="20sp"
         android:layout_marginBottom="16dp"/>
 
+    <TextView
+        android:id="@+id/subtituloConfigAlertas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Marque um ou mais bairros"
+        android:textSize="16sp"
+        android:layout_marginBottom="16dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewBairros"
         android:layout_width="match_parent"

@@ -119,6 +119,7 @@
         android:contentDescription="@string/select_image_button_description"
         app:icon="@drawable/round_image_24"
         app:layout_constraintStart_toStartOf="parent"
+
         app:layout_constraintTop_toBottomOf="@id/descriptionEditText" />
 
     <ImageView
@@ -139,11 +140,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="128dp"
         android:text="@string/send_report"
         android:contentDescription="@string/report_flood_button_description"
         app:icon="@drawable/round_send_24"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/selectImageButton" />
 
 

@@ -1,4 +1,4 @@
-package com.example.appalertaenchentes.database
+package com.example.appalertaenchentes.data.local
 
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase

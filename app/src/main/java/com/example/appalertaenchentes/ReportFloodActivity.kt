@@ -11,8 +11,8 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import com.example.appalertaenchentes.database.AppDatabase
-import com.example.appalertaenchentes.database.FloodReport
+import com.example.appalertaenchentes.data.local.AppDatabase
+import com.example.appalertaenchentes.data.local.FloodReport
 import com.example.appalertaenchentes.databinding.ActivityReportFloodBinding
 import com.example.appalertaenchentes.utils.LocationUtils
 import kotlinx.coroutines.launch
@@ -82,9 +82,6 @@ class ReportFloodActivity : AppCompatActivity() {
         // Definir a opção padrão no Spinner
         binding.severitySpinner.setSelection(0)  // 0 representa a primeira posição no array, que é "Selecione uma gravidade"
 
-        // Verificar se a inicialização do Spinner está ocorrendo conforme o esperado e se as opções de gravidade são carregadas corretamente.
-        Log.d("ReportFloodActivity", "[LOG] Opções de gravidade: '${gravityOptions.joinToString(", ")}'")
-
         // Configuração do AutoCompleteTextView com opções de localização do locationutils
         val locationAdapter = ArrayAdapter(this, android.R.layout.simple_dropdown_item_1line, LocationUtils.locationOptions)
         binding.locationAutoComplete.setAdapter(locationAdapter)
@@ -117,6 +114,7 @@ class ReportFloodActivity : AppCompatActivity() {
 
         // Antes de validar os dados, limpe a mensagem de erro
         binding.severityInputLayout.error = null
+        binding.locationAutoComplete.error = null
 
         // Dados antes da validação
         Log.d("ReportFloodActivity", "[LOG] Localidade antes da validação: $location")
@@ -150,11 +148,17 @@ class ReportFloodActivity : AppCompatActivity() {
 
         // Inserção no banco de dados usando coroutine
         lifecycleScope.launch {
-            floodReportDao.insert(floodReport)
-            runOnUiThread {
-                Toast.makeText(this@ReportFloodActivity, "Relatório salvo com sucesso!", Toast.LENGTH_SHORT).show()
-                binding.reportFloodButton.text = "Relatório enviado"
-                binding.reportFloodButton.isEnabled = false
+            try {
+                floodReportDao.insert(floodReport)
+                runOnUiThread {
+                    Toast.makeText(this@ReportFloodActivity, "Relatório salvo com sucesso!", Toast.LENGTH_SHORT).show()
+                    binding.reportFloodButton.text = "Relatório enviado"
+                    binding.reportFloodButton.isEnabled = false
+                }
+            } catch (e: Exception) {
+                Log.e("ReportFloodActivity", "Erro ao salvar relatório: ${e.message}", e)
+                runOnUiThread {
+                }
             }
         }
 

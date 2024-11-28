@@ -22,6 +22,11 @@ class MainActivity : AppCompatActivity() {
         intent
     }
 
+    // Intent para ConfiguracaoAlertasActivity reutilizável
+    private val configureAlertsIntent: Intent by lazy {
+        Intent(this, ConfiguracaoAlertasActivity::class.java)
+    }
+
     // Método chamado quando a atividade é criada
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,10 +36,11 @@ class MainActivity : AppCompatActivity() {
             // Uso de apply para eliminar a necessidade de chamar binding várias vezes para realizar configurações adicionais no objeto.
             setContentView(root)
         }
-        setupViews()
+        // setupViews()
         setupListeners()
     }
 
+    /* barra de navegação removida
     // Configuração das views
     private fun setupViews() {
         // Configuração do menu
@@ -53,7 +59,7 @@ class MainActivity : AppCompatActivity() {
                 else -> false
             }
         }
-    }
+    } */
 
     private fun setupListeners() {
         // Configuração dos listeners
@@ -74,8 +80,7 @@ class MainActivity : AppCompatActivity() {
             try {
                 Log.d("MainActivity", "[LOG] Clicado no botão de Configurar Alertas")
                 // Intent para a tela de configuração de alertas
-                val intent = Intent(this, ConfiguracaoAlertasActivity::class.java)
-                startActivity(intent)
+                startActivity(configureAlertsIntent)
             } catch (e: ActivityNotFoundException) {
                 handleActivityNotFoundException(e)
             } catch (e: Exception) {
@@ -87,7 +92,7 @@ class MainActivity : AppCompatActivity() {
     internal fun handleActivityNotFoundException(e: ActivityNotFoundException) {
         // Tratamento de erro de não encontrada a atividade
         Log.e("MainActivity", "[LOG] Atividade não encontrada: ${e.message}")
-        Toast.makeText(this, "Atividade não encontrada", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Erro! Tente novamente mais tarde.", Toast.LENGTH_SHORT).show()
     }
 
     internal fun handleException(e: Exception) {

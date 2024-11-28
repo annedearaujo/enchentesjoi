@@ -64,10 +64,15 @@ dependencies {
     implementation("androidx.test.ext:junit-ktx:1.1.5")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
 
-    // Room & Lifecycle
+    // ViewModel and LiveData
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx")
+
+    // Room / SQLite & Lifecycle
+    implementation("androidx.room:room-runtime:2.6.1")
+    implementation("androidx.room:room-ktx:2.6.1")
     annotationProcessor("androidx.room:room-compiler:2.6.0")
     implementation("androidx.lifecycle:lifecycle-extensions:2.2.0")
-    implementation("androidx.room:room-runtime:2.6.1")
 
     // Firebase
     // Import the Firebase BoM
@@ -83,6 +88,14 @@ dependencies {
     implementation("com.google.firebase:firebase-inappmessaging-ktx")
     implementation("com.google.firebase:firebase-firestore-ktx")
 
+    //WorkManager
+    implementation("androidx.work:work-runtime-ktx:2.9.0")
+
+    // Coroutines
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-play-services")
+
     // Outros
     implementation("com.google.android.gms:play-services-location:21.0.1")
     implementation("androidx.activity:activity-ktx:1.8.1")
@@ -90,6 +103,7 @@ dependencies {
     implementation("com.deque.android:axe-android:0.2.0")
     implementation("androidx.recyclerview:recyclerview:1.3.2")
     implementation("androidx.recyclerview:recyclerview-selection:1.1.0")
+    implementation("androidx.cardview:cardview:1.0.0")
 
     // Testes
     testImplementation("junit:junit:4.13.2") {
