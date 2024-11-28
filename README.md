@@ -1,6 +1,6 @@
-# ReportFlood
+# Enchentes Joinville
 
-O **ReportFlood** é um aplicativo Android desenvolvido em Kotlin que permite aos usuários relatar enchentes em suas áreas locais. O aplicativo foi criado para fornecer uma maneira simples de relatar ocorrências de enchentes e compartilhar informações importantes com a comunidade.
+O **Enchentes Joinville** é um aplicativo Android desenvolvido em Kotlin que permite aos usuários relatar enchentes em suas áreas locais. O aplicativo foi criado para fornecer uma maneira simples de relatar ocorrências de enchentes e compartilhar informações importantes com a comunidade.
 
 ## Funcionalidades
 
@@ -23,7 +23,7 @@ Antes de executar o projeto, certifique-se de ter o ambiente de desenvolvimento 
 ## Como Executar o Projeto
 
 1. Clone este repositório:
-git clone https://github.com/annedearaujo/ReportFlood.git
+git clone https://github.com/annedearaujo/enchentesjoinville.git
 
 2. Abra o projeto em seu ambiente de desenvolvimento Android.
 
